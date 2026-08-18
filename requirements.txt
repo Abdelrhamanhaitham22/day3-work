@@ -1,0 +1,11 @@
+langchain
+langchain-community
+langchain-chroma
+langchain-text-splitters
+chromadb
+fastembed
+groq
+pypdf
+jsonschema
+rank-bm25
+python-dotenv

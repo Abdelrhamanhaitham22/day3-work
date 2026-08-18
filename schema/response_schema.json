@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["recommendation", "evidence", "citations", "confidence"],
+  "properties": {
+    "recommendation": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "string"
+    },
+    "citations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["document", "section", "page"],
+        "properties": {
+          "document": { "type": "string" },
+          "section": { "type": "string" },
+          "page": { "type": "integer", "minimum": 1 },
+          "chunk_id": { "type": "string" }
+        }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "insufficient"]
+    }
+  },
+  "if": {
+    "properties": {
+      "confidence": { "const": "insufficient" }
+    }
+  },
+  "then": {},
+  "else": {
+    "required": ["evidence", "citations"],
+    "properties": {
+      "evidence": { "minLength": 1 },
+      "citations": { "minItems": 1 }
+    }
+  }
+}
